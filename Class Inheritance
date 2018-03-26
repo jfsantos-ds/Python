@@ -1,0 +1,51 @@
+### Link to the problem description: https://www.hackerrank.com/challenges/30-inheritance/problem
+
+### Header Locked stub code section (by HackerRank)
+## Person class is defined, the __init__ and print methods are defined, which later are used by the new student class.
+# Inputs are first, last name and ID
+class Person:
+	def __init__(self, firstName, lastName, idNumber):
+		self.firstName = firstName
+		self.lastName = lastName
+		self.idNumber = idNumber
+	def printPerson(self):
+		print("Name:", self.lastName + ",", self.firstName)
+		print("ID:", self.idNumber)
+###
+
+### My code section
+class Student(Person):
+## Init method called on the inherited person class, defines the student. Scores are part of the input and stored
+    def __init__(self, firstName, lastName, idNumber, scores):
+        Person.__init__(self, firstName, lastName, idNumber)
+        self.scores = scores
+        
+# An if chain represents a switch used to define the student's grade based on test scores
+    def calculate(self):
+        mean = sum(scores)/len(scores)
+        grade = None
+        if mean < 40:
+            grade = "T"
+        elif mean < 55:
+            grade = "D"
+        elif mean < 70:
+            grade = "P"
+        elif mean < 80:
+            grade = "A"
+        elif mean < 90:
+            grade = "E"
+        else:
+            grade = "O"
+        return grade
+        
+### Footer Locked stub code section (by HackerRank)
+## Stores input and calls upon the newly defined student's class methods
+line = input().split()
+firstName = line[0]
+lastName = line[1]
+idNum = line[2]
+numScores = int(input()) # not needed for Python
+scores = list( map(int, input().split()) )
+s = Student(firstName, lastName, idNum, scores)
+s.printPerson()
+print("Grade:", s.calculate())
